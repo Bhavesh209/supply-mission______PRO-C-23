@@ -1,4 +1,4 @@
-var helicopterIMG,bg, helicopterSprite, packageSprite,packageIMG;
+var helicopterIMG,helicopter1IMG,bg, helicopterSprite, packageSprite,packageIMG;
 var packageBody,ground;
 const Engine = Matter.Engine;
 const World = Matter.World;
@@ -9,7 +9,8 @@ function preload()
 {
 	helicopterIMG=loadImage("helicopter.png");
 	packageIMG=loadImage("package.png");
-	bg=loadImage("bg.png")
+	bg=loadImage("bg.png");
+    helicopter1IMG=loadImage("helicopter1.png");
 }
 
 function setup() {
@@ -18,15 +19,15 @@ function setup() {
 	
 
 	packageSprite=createSprite(width/2, 80, 10,10);
-	packageSprite.addImage(packageIMG)
-	packageSprite.scale=0.2
+	packageSprite.addImage(packageIMG);
+	packageSprite.scale=0.2;
 
 	helicopterSprite=createSprite(width/2, 200, 10,10);
-	helicopterSprite.addImage(helicopterIMG)
-	helicopterSprite.scale=0.6
+	helicopterSprite.addImage(helicopterIMG);
+	helicopterSprite.scale=0.6;
 
 	groundSprite=createSprite(width/2, height-35, width,10);
-	groundSprite.shapeColor=color(255)
+	groundSprite.shapeColor=color(255);
 
 
 	engine = Engine.create();
@@ -40,7 +41,7 @@ function setup() {
 	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
  	World.add(world, ground);
 
- 	boxPosition=width/2-100
+ 	boxPosition=width/2-100;
  	boxY=610;
 
 
@@ -72,8 +73,8 @@ function draw() {
   rectMode(CENTER);
   background(bg);
  
-  packageSprite.x= packageBody.position.x 
-  packageSprite.y= packageBody.position.y 
+  packageSprite.x= packageBody.position.x ;
+  packageSprite.y= packageBody.position.y ;
 
 
   drawSprites();
@@ -84,24 +85,28 @@ function draw() {
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
-
+    helicopterSprite.addImage(helicopter1IMG);
+	 helicopterSprite.changeImage(helicopter1IMG);
     helicopterSprite.x=helicopterSprite.x-20;    
     translation={x:-20,y:0}
-    Matter.Body.translate(packageBody, translation)
+    Matter.Body.translate(packageBody, translation);
 
 
   } else if (keyCode === RIGHT_ARROW) {
+
+	helicopterSprite.addImage(helicopterIMG);
+	 helicopterSprite.changeImage(helicopterIMG);
     helicopterSprite.x=helicopterSprite.x+20;
     translation={x:20,y:0}
-    Matter.Body.translate(packageBody, translation)
+    Matter.Body.translate(packageBody, translation);
   }
   else if (keyCode === DOWN_ARROW) {
     Matter.Body.setStatic(packageBody,false);
-    packageBody.stop=true
+    packageBody.stop=true;
   }
   else if (keyDown("space")) {
     Matter.Body.setStatic(packageBody,false);
-    packageBody.stop=true
+    packageBody.stop=true;
   }
 }
 
