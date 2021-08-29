@@ -99,6 +99,10 @@ function keyPressed() {
     Matter.Body.setStatic(packageBody,false);
     packageBody.stop=true
   }
+  else if (keyDown("space")) {
+    Matter.Body.setStatic(packageBody,false);
+    packageBody.stop=true
+  }
 }
 
 
